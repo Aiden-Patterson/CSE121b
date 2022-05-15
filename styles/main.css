@@ -7,7 +7,9 @@ div {
     margin: 10px;
     text-align: center;
 }
-
+img {
+    max-height: 300px;
+}
 footer {
     background-color: gray;
     color: white;
@@ -24,11 +26,6 @@ label {
     display: inline-block;
     min-width: 120px;
     text-align: right;
-}
-
-main {
-    display: flex;
-    justify-content: center;
 }
 
 nav {
@@ -66,12 +63,6 @@ nav ul li a:hover {
     color: black;
 }
 
-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
 /* Class Selectors */
 .active {
     background-color: white;
@@ -83,6 +74,14 @@ section {
 }
 
 /* ID Selectors */
+#favorite-foods, #hobbies, #places-lived {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: inline-block;
+    text-align: left;
+    vertical-align: top;
+}
 
 /* Media Queries */
 @media only screen and (min-width: 32.5em) {

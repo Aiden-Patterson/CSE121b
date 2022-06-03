@@ -61,10 +61,10 @@ message2 = dayOfWeekString;
 /* OUTPUT */
 
 // Step 1: Assign the value of the first message variable to the HTML element with an ID of message1
-document.querySelector("$message1").textContent = message1;
+document.querySelector("#message1").textContent = message1;
 
 // Step 2: Assign the value of the second message variable to the HTML element with an ID of message2
-document.querySelector("$message2").textcontent = message2;
+document.querySelector("#message2").textContent = message2;
 
 /* FETCH */
 // Step 1: Declare a global empty array variable to store a list of temples
@@ -77,13 +77,20 @@ let templeList = [];
 // - Creates an HTML <img> element and add the temple's imageUrl property to the src attribute and the temple's templeName property to the alt attribute
 // - Appends the <h3> element, the two <h4> elements, and the <img> element to the <article> element as children
 // - Appends the <article> element to the HTML element with an ID of temples
-const output = (templeList) => {
-  templeList.forEach((temple) => {
-    document.createElement("h3").textContent = temple.templeName;
-    document.createElement("h4").textContent = temple.location;
-    document.createElement("h4").textContent = temple.dedicated;
-    document.createElement("img").setAttribute("src", temple.imageUrl);
-    document.createElement("img").setAttribute("alt", temple.templeName);
+const output = (temples) => {
+  temples.forEach((temple) => {
+    let templeName = document.createElement("h3");
+    templeName.textContent = temple.templeName;
+
+    let location = document.createElement("h4");
+    location.textContent = temple.location;
+
+    let dedicated = document.createElement("h4");
+    dedicated.textContent = temple.dedicated;
+
+    let img = document.createElement("img")
+    img.setAttribute("src", temple.imageUrl);
+    img.setAttribute("alt", temple.templeName);
 
     article = document.createElement("article");
     article.appendChild(templeName);
@@ -103,6 +110,12 @@ async function getTemples(){
 }
 
 getTemples();
+fetch('https://byui-cse.github.io/cse121b-course/week05/temples.json')
+  .then(response => response.json())
+  .then(temple => {
+    templeList = temples;
+    output(templeList);
+  });
 
 // Step 7: Declare a function named reset that clears all of the <article> elements from the HTML element with an ID of temples
 const reset = () => {
@@ -136,7 +149,7 @@ const sortBy = () => {
   }
 }
 // Step 9: Add a change event listener to the HTML element with an ID of sortBy that calls the sortBy function
-document.querySelector('#sortBy').addEventListener('change', sortBy);
+document.querySelector('#sortBy').addEventListener('change', sortBy());
 /* STRETCH */
 
 // Consider adding a "Filter by" feature that allows users to filter the list of temples

@@ -11,7 +11,16 @@
 </head>
 <body>
     <h1>Create your own team!</h1>
+    <label for="generation">Choose a generation:</label>
+
+<select name="games" id="games">
+  <option value="2">Kanto</option>
+  <option value="3">Johto</option>
+  <option value="4">Hoenn</option>
+  <option value="5">Sinnoh</option>
+</select>
     <button id="randomPokemon">Generate Random Pokemon</button>
+    <div id="gameName"></div>
     <div id="pokemon">
     </div> 
     <script src="scripts/pokemon.js"></script>

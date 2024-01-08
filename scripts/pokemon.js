@@ -19,12 +19,10 @@ const output = (pokemon) => {
         //type2.textContent = "Type 2: " + pokemon.types[1].type.name;
       }
       //else
-      {
-        type2.textContent = "Type 2: N/A";
-      }
-  
-      let sprite = document.createElement("img")
-      //sprite.setAttribute("src", pokemon.sprites.front_default);
+      //let species_url = pokemon.pokemon_entries[rand].pokemon-species.url;
+      //const x = await fetch(species_url)
+      //let sprite = getSprite(species_url)
+      //sprite.setAttribute("src", sprites.front_default);
       //sprite.setAttribute("alt", pokemon.templeName);
   
       article = document.createElement("article");
@@ -42,12 +40,24 @@ const output = (pokemon) => {
     document.querySelector('#pokemon').innerHTML = '';
   }
   generation = document.querySelector('#games')
+
+
 async function getPokemon(){
   reset();
-    //const result = await fetch('https://pokeapi.co/api/v2/pokemon/' + rand_id);
     const result = await fetch('https://pokeapi.co/api/v2/pokedex/' + generation.value)
     const data = await result.json();
     output(data);
+}
+
+async function getSprite(url){
+  const species = await fetch(url)
+  const x = await species.json();
+  let pokemon_url = x.varieties[0].pokemon.url;
+
+  const i = await fetch(pokemon_url)
+  const sprite_url = await i.json();
+
+  return i;
 }
 
 document.querySelector("#randomPokemon").addEventListener("click", getPokemon);
